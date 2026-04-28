@@ -1,3 +1,6 @@
+// db.js
+// Establishes a connection to mariadb using authentication information and creates a pool of usable connections
+
 import * as mariadb from 'mariadb';
 
 const pool = mariadb.createPool({

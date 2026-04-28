@@ -1,6 +1,10 @@
+// server.js
+// Starts a server that listens for HTTP requests from the fronted and calls procedures.js fucntions
+// Input validation status handling are also written here
+
 import express from 'express';
 import cors from 'cors';
-import { createUser } from './procedures.js';
+import { CreateUser } from './procedures.js';
 
 const app = express();
 const PORT = 3000;
@@ -19,10 +23,9 @@ app.post('/api/register', async (req, res) => {
     }
 
     try {
-        await createUser(username, password);
+        await CreateUser(username, password);
         res.status(201).json({ message: 'User created successfully' });
     } catch (err) {
-        // Duplicate username (unique constraint violation)
         if (err.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ error: 'Username already exists' });
         }

@@ -1,0 +1,6 @@
+To import api routes into a js file: 
+import * as API from './api.js';
+
+Authentication
+API.CreateUser('username', 'password') -- Adds a user to the database in account creation
+

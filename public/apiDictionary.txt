@@ -1,6 +1,153 @@
 To import api routes into a js file: 
 import * as API from './api.js';
 
+================================================================================
 Authentication
-API.CreateUser('username', 'password') -- Adds a user to the database in account creation
+================================================================================
 
+API.CreateUser('username', 'password') TESTED
+  -- Adds a user to the database in account creation
+  -- Parameters: username (string), password (string)
+  -- Returns: { message: 'User created successfully' }
+  -- Errors: 409 if username already exists
+
+API.GetAuthContext('username', 'password') TESTED
+  -- Sends login credentials for server-side comparison, returns userId on success
+  -- Parameters: username (string), password (string)
+  -- Returns: { message: 'Login successful', userId: (int) }
+  -- Errors: 401 if invalid username or password
+
+================================================================================
+Strategy Triggers
+================================================================================
+
+API.GetBullishEngulfingTriggers('ticker')
+  -- Returns all dates where a Bullish Engulfing pattern triggered for the given stock
+  -- Parameters: ticker (string, e.g. 'AAPL')
+  -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
+
+API.GetInsideBarTriggers('ticker')
+  -- Returns all dates where an Inside Bar pattern triggered for the given stock
+  -- Parameters: ticker (string, e.g. 'AAPL')
+  -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
+
+API.GetOutsideBarTriggers('ticker')
+  -- Returns all dates where an Outside Bar pattern triggered for the given stock
+  -- Parameters: ticker (string, e.g. 'AAPL')
+  -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
+
+API.GetGoldenCrossTriggers('ticker')
+  -- Returns all dates where a Golden Cross triggered for the given stock
+  -- Parameters: ticker (string, e.g. 'AAPL')
+  -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
+
+API.GetMAPullbackTriggers('ticker')
+  -- Returns all dates where a Moving Average Pullback triggered for the given stock
+  -- Parameters: ticker (string, e.g. 'AAPL')
+  -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
+
+API.GetRSI14Triggers('ticker')
+  -- Returns all dates where the 14-day RSI crossed back above 30 for the given stock
+  -- Parameters: ticker (string, e.g. 'AAPL')
+  -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
+
+================================================================================
+Stock Pricing
+================================================================================
+
+API.GetStockDayPrice('ticker', 'date')
+  -- Returns the mean price (avg of high and low) for a stock on a specific date
+  -- Parameters: ticker (string), date (string, 'YYYY-MM-DD')
+  -- Returns: [{ mean_price: (decimal) }]
+
+API.GetFutureStockDayPrice('ticker', 'date', daysOffset)
+  -- Returns the mean price for a stock at trigger date + daysOffset trading days
+  -- Parameters: ticker (string), date (string, 'YYYY-MM-DD'), daysOffset (int)
+  -- Returns: [{ mean_price: (decimal) }]
+
+================================================================================
+Favorited Stocks
+================================================================================
+
+API.AddFavoritedStock(userId, 'ticker')
+  -- Favorites a stock for the given user
+  -- Parameters: userId (int), ticker (string)
+  -- Returns: { message: 'Stock favorited successfully' }
+  -- Errors: 409 if stock already favorited
+
+API.DeleteFavoritedStock(userId, 'ticker')
+  -- Removes a favorited stock for the given user
+  -- Parameters: userId (int), ticker (string)
+  -- Returns: { message: 'Favorited stock removed successfully' }
+
+API.GetFavoritedStocks(userId)
+  -- Returns all favorited stock names for the given user
+  -- Parameters: userId (int)
+  -- Returns: [{ name: 'Stock Name' }, ...]
+
+================================================================================
+Favorited Strategies
+================================================================================
+
+API.AddFavoriteStrategy(userId, strategyId)
+  -- Favorites a strategy for the given user
+  -- Parameters: userId (int), strategyId (int)
+  -- Returns: { message: 'Strategy favorited successfully' }
+  -- Errors: 409 if strategy already favorited
+
+API.RemoveFavoriteStrategy(userId, strategyId)
+  -- Removes a favorited strategy for the given user
+  -- Parameters: userId (int), strategyId (int)
+  -- Returns: { message: 'Favorited strategy removed successfully' }
+
+API.GetFavoritedStrategies(userId)
+  -- Returns all favorited strategy names for the given user
+  -- Parameters: userId (int)
+  -- Returns: [{ strategy_name: 'Strategy Name' }, ...]
+
+================================================================================
+Results
+================================================================================
+
+API.AddResult(userId, strategyId, 'name', 'description', 'notes')
+  -- Saves a backtest result to the database
+  -- Parameters: userId (int), strategyId (int), name (string), description (string|null), notes (string|null)
+  -- Returns: { message: 'Result saved successfully' }
+
+API.DeleteResult(resultId)
+  -- Deletes a saved result from the database
+  -- Parameters: resultId (int)
+  -- Returns: { message: 'Result deleted successfully' }
+
+API.GetResults(userId)
+  -- Returns all saved results with strategy name for the given user
+  -- Parameters: userId (int)
+  -- Returns: [{ result_id: (int), strategy_name: 'Name', name: 'Name', description: 'Desc', notes: 'Notes' }, ...]
+
+================================================================================
+Stocks
+================================================================================
+
+API.GetStocks()
+  -- Returns a list of all available stocks and their tickers
+  -- Parameters: none
+  -- Returns: [{ ticker: 'AAPL', name: 'Apple Inc.' }, ...]
+
+API.GetStockTicker('name')
+  -- Returns the ticker symbol for a given stock name
+  -- Parameters: name (string, e.g. 'Airbnb')
+  -- Returns: [{ ticker: 'ABNB' }]
+
+================================================================================
+Strategies
+================================================================================
+
+API.GetStrategies()
+  -- Returns a list of all available strategies and their IDs
+  -- Parameters: none
+  -- Returns: [{ strategy_id: (int), strategy_name: 'Strategy Name' }, ...]
+
+API.GetStrategyID('strategyName')
+  -- Returns the strategy ID for a given strategy name
+  -- Parameters: strategyName (string, e.g. '2 Day RSI')
+  -- Returns: [{ strategy_id: (int) }]

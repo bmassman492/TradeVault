@@ -2,4 +2,6 @@
 
 import * as API from './api.js';
 
-API.CreateUser('username4253', 'password4353');
+const userinfo = await API.GetAuthContext('testuser', 'testpass');
+console.log(userinfo);
+console.log(userinfo.userId);

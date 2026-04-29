@@ -1,25 +1,22 @@
 To import api routes into a js file: 
 import * as API from './api.js';
 
-================================================================================
-Authentication
-================================================================================
 
-API.CreateUser('username', 'password') TESTED
+///Authentication///
+
+API.CreateUser('username', 'password')                                ///TESTED///
   -- Adds a user to the database in account creation
   -- Parameters: username (string), password (string)
   -- Returns: { message: 'User created successfully' }
   -- Errors: 409 if username already exists
 
-API.GetAuthContext('username', 'password') TESTED
+API.GetAuthContext('username', 'password')                            ///TESTED///
   -- Sends login credentials for server-side comparison, returns userId on success
   -- Parameters: username (string), password (string)
   -- Returns: { message: 'Login successful', userId: (int) }
   -- Errors: 401 if invalid username or password
 
-================================================================================
-Strategy Triggers
-================================================================================
+///Strategy Triggers///
 
 API.GetBullishEngulfingTriggers('ticker')
   -- Returns all dates where a Bullish Engulfing pattern triggered for the given stock
@@ -51,9 +48,7 @@ API.GetRSI14Triggers('ticker')
   -- Parameters: ticker (string, e.g. 'AAPL')
   -- Returns: [{ date: 'YYYY-MM-DD' }, ...]
 
-================================================================================
-Stock Pricing
-================================================================================
+///Stock Pricing///
 
 API.GetStockDayPrice('ticker', 'date')
   -- Returns the mean price (avg of high and low) for a stock on a specific date
@@ -65,9 +60,7 @@ API.GetFutureStockDayPrice('ticker', 'date', daysOffset)
   -- Parameters: ticker (string), date (string, 'YYYY-MM-DD'), daysOffset (int)
   -- Returns: [{ mean_price: (decimal) }]
 
-================================================================================
-Favorited Stocks
-================================================================================
+///Favorited Stocks///
 
 API.AddFavoritedStock(userId, 'ticker')
   -- Favorites a stock for the given user
@@ -85,9 +78,7 @@ API.GetFavoritedStocks(userId)
   -- Parameters: userId (int)
   -- Returns: [{ name: 'Stock Name' }, ...]
 
-================================================================================
-Favorited Strategies
-================================================================================
+///Favorited Strategies///
 
 API.AddFavoriteStrategy(userId, strategyId)
   -- Favorites a strategy for the given user
@@ -105,9 +96,7 @@ API.GetFavoritedStrategies(userId)
   -- Parameters: userId (int)
   -- Returns: [{ strategy_name: 'Strategy Name' }, ...]
 
-================================================================================
-Results
-================================================================================
+///Results///
 
 API.AddResult(userId, strategyId, 'name', 'description', 'notes')
   -- Saves a backtest result to the database
@@ -124,9 +113,7 @@ API.GetResults(userId)
   -- Parameters: userId (int)
   -- Returns: [{ result_id: (int), strategy_name: 'Name', name: 'Name', description: 'Desc', notes: 'Notes' }, ...]
 
-================================================================================
-Stocks
-================================================================================
+///Stocks///
 
 API.GetStocks()
   -- Returns a list of all available stocks and their tickers
@@ -138,9 +125,7 @@ API.GetStockTicker('name')
   -- Parameters: name (string, e.g. 'Airbnb')
   -- Returns: [{ ticker: 'ABNB' }]
 
-================================================================================
-Strategies
-================================================================================
+///Strategies///
 
 API.GetStrategies()
   -- Returns a list of all available strategies and their IDs

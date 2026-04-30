@@ -1,3 +1,5 @@
+// public/login.js
+
 import { CreateUser, GetAuthContext } from '../api.js';
 
 document.getElementById('loginBtn').addEventListener('click', async () => {

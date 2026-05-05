@@ -27,7 +27,19 @@
                     <p id="backtest-result">Run backtest to see results</p>
                 <hr>
                 <h2>Save Results</h2>
-                    <p>Save results interface here</p>
+                <div class="backtest-form">
+                    <label>Name:
+                        <input type="text" id="result-name" placeholder="Enter a name">
+                    </label>
+                    <label>Description:
+                        <input type="text" id="result-description" readonly>
+                    </label>
+                    <label class="notes-label">Notes:
+                        <textarea id="result-notes" maxlength="200" placeholder="Optional notes..."></textarea>
+                    </label>
+                </div>
+                <button id="save-result-btn">Save Result</button>
+                <p id="save-status"></p>
             </div>
             <div class="right-column">
                 <div class="welcome">

@@ -187,13 +187,35 @@ body {
 }
 
 .backtest-form select,
-.backtest-form input[type="number"] {
+.backtest-form input[type="number"],
+.backtest-form input[type="text"] {
     flex: 1;
     min-width: 0;
     font-size: 14px;
     padding: 4px 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.backtest-form input[readonly] {
+    background: #f5f5f5;
+    color: #555;
+}
+
+.notes-label {
+    align-items: flex-start !important;
+}
+
+#result-notes {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    height: 60px;
+    font-family: inherit;
 }
 
 /* ===== Typography ===== */

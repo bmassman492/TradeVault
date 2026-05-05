@@ -1,8 +1,11 @@
 import * as API from '../api.js';
 
 export let strategyName = null;
+export let strategyId   = null;
 export let stockID = null;
 export let positionDays = null;
+
+const strategyIdMap = {};
 
 // Price data only goes up to ~April 2026; exclude triggers whose exit date would land on or after this.
 const DATA_CUTOFF = new Date('2026-04-01');
@@ -88,12 +91,47 @@ async function runBacktest() {
 
 function showResult(text) {
     document.getElementById('backtest-result').textContent = text;
+    document.getElementById('result-description').value = text;
+}
+
+async function saveResult() {
+    const userId = parseInt(sessionStorage.getItem('userId'));
+    const name   = document.getElementById('result-name').value.trim();
+    const description = document.getElementById('result-description').value;
+    const notes  = document.getElementById('result-notes').value;
+
+    if (!userId)      return showSaveStatus('You must be logged in to save.');
+    if (!strategyId)  return showSaveStatus('Run a backtest first.');
+    if (!name)        return showSaveStatus('Please enter a name.');
+    if (!description) return showSaveStatus('Run a backtest first.');
+
+    const btn = document.getElementById('save-result-btn');
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+
+    try {
+        await API.AddResult(userId, strategyId, name, description, notes);
+        showSaveStatus('Result saved successfully.');
+        document.getElementById('result-name').value = '';
+        document.getElementById('result-notes').value = '';
+    } catch (err) {
+        showSaveStatus('Error saving result. Check the console.');
+        console.error(err);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Save Result';
+    }
+}
+
+function showSaveStatus(text) {
+    document.getElementById('save-status').textContent = text;
 }
 
 async function populateStrategyDropdown() {
     const strategies = await API.GetStrategies();
     const select = document.getElementById('strategy-select');
     for (const s of strategies) {
+        strategyIdMap[s.strategy_name] = s.strategy_id;
         const opt = document.createElement('option');
         opt.value = s.strategy_name;
         opt.textContent = s.strategy_name;
@@ -101,6 +139,7 @@ async function populateStrategyDropdown() {
     }
     select.addEventListener('change', () => {
         strategyName = select.value || null;
+        strategyId   = strategyName ? (strategyIdMap[strategyName] ?? null) : null;
     });
 }
 
@@ -123,5 +162,6 @@ document.getElementById('position-days').addEventListener('input', e => {
 });
 
 document.getElementById('test-strategy-btn').addEventListener('click', runBacktest);
+document.getElementById('save-result-btn').addEventListener('click', saveResult);
 
 await Promise.all([populateStrategyDropdown(), populateStockDropdown()]);

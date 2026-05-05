@@ -95,3 +95,44 @@ async function loadStocks() {
 }
 
 if (userId) loadStocks();
+
+async function loadResults() {
+    if (!userId) return;
+    const results = await API.GetResults(userId);
+    const list = document.getElementById('results-list');
+    list.innerHTML = '';
+    for (const r of results) {
+        const li = document.createElement('li');
+        li.textContent = r.name;
+        li.addEventListener('click', () => openModal(r));
+        list.appendChild(li);
+    }
+}
+
+function openModal(r) {
+    document.getElementById('modal-name').textContent = r.name;
+    document.getElementById('modal-strategy').textContent = r.strategy_name;
+    document.getElementById('modal-description').textContent = r.description;
+    document.getElementById('modal-notes').textContent = r.notes || '—';
+
+    document.getElementById('modal-delete-btn').onclick = async () => {
+        await API.DeleteResult(r.result_id);
+        closeModal();
+        loadResults();
+    };
+
+    document.getElementById('result-modal').removeAttribute('hidden');
+}
+
+function closeModal() {
+    document.getElementById('result-modal').setAttribute('hidden', '');
+}
+
+document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+document.getElementById('result-modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+});
+
+window.addEventListener('result-saved', loadResults);
+
+if (userId) loadResults();

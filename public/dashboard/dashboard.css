@@ -218,6 +218,117 @@ body {
     font-family: inherit;
 }
 
+/* ===== Save Result button ===== */
+
+#save-result-btn {
+    margin-top: 12px;
+    padding: 7px 16px;
+    font-size: 14px;
+    background: #d28736;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#save-result-btn:hover:not(:disabled) {
+    background: #b8722c;
+}
+
+#save-result-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* ===== Saved results list ===== */
+
+#results-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#results-list li {
+    padding: 5px 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#results-list li:hover {
+    background: #f5f5f5;
+}
+
+/* ===== Result modal ===== */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    width: 360px;
+    max-width: 90vw;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-box h3 {
+    margin: 0;
+}
+
+.modal-box p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.modal-actions button {
+    padding: 6px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-actions button:not(.btn-danger) {
+    background: #e0e0e0;
+}
+
+.modal-actions button:not(.btn-danger):hover {
+    background: #ccc;
+}
+
+.btn-danger {
+    background: #c0392b;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #a93226;
+}
+
 /* ===== Typography ===== */
 
 h2 {

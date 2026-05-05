@@ -114,6 +114,7 @@ async function saveResult() {
         showSaveStatus('Result saved successfully.');
         document.getElementById('result-name').value = '';
         document.getElementById('result-notes').value = '';
+        window.dispatchEvent(new CustomEvent('result-saved'));
     } catch (err) {
         showSaveStatus('Error saving result. Check the console.');
         console.error(err);

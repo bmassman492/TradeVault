@@ -2,6 +2,5 @@
 
 import * as API from './api.js';
 
-const userinfo = await API.GetAuthContext('testuser', 'testpass');
-console.log(userinfo);
-console.log(userinfo.userId);
+const username = await API.GetUsername(7);
+console.log(username[0].username);

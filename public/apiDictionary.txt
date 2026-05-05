@@ -16,6 +16,11 @@ API.GetAuthContext('username', 'password')                            ///TESTED/
   -- Returns: { message: 'Login successful', userId: (int) }
   -- Errors: 401 if invalid username or password
 
+API.GetUsername(userId)
+  -- Returns the username for the given user ID
+  -- Parameters: userId (int)
+  -- Returns: [{ username: 'string' }]
+
 ///Strategy Triggers///
 
 API.GetBullishEngulfingTriggers('ticker')

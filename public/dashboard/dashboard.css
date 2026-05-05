@@ -1,6 +1,77 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 0;
+    font-family: sans-serif;
+    background: #f0f0f0;
+}
+
 .page {
     display: flex;
     gap: 16px;
-    max-width: 960px;
-    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* ===== Left column ===== */
+
+.left-column {
+    width: 500px;
+    height: 620px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* ===== Right column ===== */
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.welcome,
+.strategies,
+.stocks,
+.results {
+    width: 320px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 16px 24px;
+}
+
+/* welcome: 80px + strategies/stocks/results: 170px each + 3 gaps of 10px = 620px */
+
+.welcome {
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.strategies,
+.stocks,
+.results {
+    height: 170px;
+    overflow-y: auto;
+}
+
+/* ===== Typography ===== */
+
+h2 {
+    margin: 0 0 8px;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
 }

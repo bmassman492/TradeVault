@@ -30,6 +30,19 @@ export async function GetAuthContext(username) {
     }
 }
 
+export async function GetUsername(userId) {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const rows = await conn.query('CALL GetUsername(?)', [userId]);
+        return rows[0];
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release();
+    }
+}
+
 // ==================== Strategy Triggers ====================
 
 export async function GetBullishEngulfingTriggers(ticker) {

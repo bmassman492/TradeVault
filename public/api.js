@@ -22,6 +22,10 @@ export async function GetAuthContext(username, password) {
     return apiFetch('/api/login', 'POST', { username, password });
 }
 
+export async function GetUsername(userId) {
+    return apiFetch(`/api/username/${encodeURIComponent(userId)}`, 'GET');
+}
+
 // ==================== Strategy Triggers ====================
 
 export async function GetBullishEngulfingTriggers(ticker) {

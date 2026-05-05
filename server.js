@@ -27,7 +27,8 @@ import {
     GetStocks,
     GetStockTicker,
     GetStrategies,
-    GetStrategyID
+    GetStrategyID,
+    GetUsername
 } from './procedures.js';
 
 const app = express();
@@ -77,6 +78,18 @@ app.post('/api/login', async (req, res) => {
         res.status(200).json({ message: 'Login successful', userId: rows[0].user_id });
     } catch (err) {
         console.error('Login error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/username/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const rows = await GetUsername(userId);
+        res.status(200).json(rows);
+    } catch (err) {
+        console.error('GetUsername error:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

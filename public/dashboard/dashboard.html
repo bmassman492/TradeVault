@@ -8,9 +8,24 @@
         <div class="page">
             <div class="left-column">
                 <h2>Test a strategy...</h2>
-                    <p>Strategy testing interface here</p>
+                <div class="backtest-form">
+                    <label>Strategy:
+                        <select id="strategy-select">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </label>
+                    <label>Stock:
+                        <select id="stock-select">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </label>
+                    <label>Hold position for <input type="number" id="position-days" min="1"> days</label>
+                </div>
+                <button id="test-strategy-btn">Test Strategy</button>
+                <hr>
                 <h2>Results</h2>
-                    <p>Results interface here</p>
+                    <p id="backtest-result">Run backtest to see results</p>
+                <hr>
                 <h2>Save Results</h2>
                     <p>Save results interface here</p>
             </div>
@@ -24,7 +39,7 @@
                 </div>
                 <div class="stocks">
                     <h2>Stocks</h2>
-                    <p>List stocks here</p>
+                    <ul id="stock-list"></ul>
                 </div>
                 <div class="results">
                     <h2>Results</h2>
@@ -34,5 +49,6 @@
 
         </div>
     <script type="module" src="dashboard.js"></script>
+    <script type="module" src="backtesting.js"></script>
     </body>
 </html>

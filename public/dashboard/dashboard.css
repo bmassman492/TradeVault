@@ -99,6 +99,103 @@ body {
     color: #d28736;
 }
 
+/* ===== Stock list ===== */
+
+#stock-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#stock-list li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#stock-list li:hover {
+    background: #f5f5f5;
+}
+
+#stock-list li.favorited {
+    font-weight: 600;
+}
+
+#stock-list li.favorited::before {
+    content: '★';
+    color: #d28736;
+    flex-shrink: 0;
+}
+
+.stock-ticker {
+    flex-shrink: 0;
+}
+
+.stock-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== Test Strategy button ===== */
+
+#test-strategy-btn {
+    margin-top: 12px;
+    padding: 7px 16px;
+    font-size: 14px;
+    background: #d28736;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#test-strategy-btn:hover:not(:disabled) {
+    background: #b8722c;
+}
+
+#test-strategy-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.left-column hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 16px 0;
+}
+
+/* ===== Backtest form ===== */
+
+.backtest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.backtest-form label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.backtest-form select,
+.backtest-form input[type="number"] {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 /* ===== Typography ===== */
 
 h2 {

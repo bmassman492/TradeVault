@@ -110,13 +110,19 @@ async function loadResults() {
 }
 
 function openModal(r) {
+    console.log('Result data:', r);
     document.getElementById('modal-name').textContent = r.name;
     document.getElementById('modal-strategy').textContent = r.strategy_name;
     document.getElementById('modal-description').textContent = r.description;
     document.getElementById('modal-notes').textContent = r.notes || '—';
 
     document.getElementById('modal-delete-btn').onclick = async () => {
-        await API.DeleteResult(r.result_id);
+        console.log('Deleting result_id:', r.result_id);
+        const res = await API.DeleteResult(r.result_id);
+        if (res?.error) {
+            console.error('Delete failed:', res.error);
+            return;
+        }
         closeModal();
         loadResults();
     };

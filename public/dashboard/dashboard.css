@@ -321,12 +321,12 @@ body {
 }
 
 .btn-danger {
-    background: #c0392b;
+    background: #d28736;
     color: white;
 }
 
 .btn-danger:hover {
-    background: #a93226;
+    background: #d28736;
 }
 
 /* ===== Typography ===== */

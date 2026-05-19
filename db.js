@@ -3,7 +3,7 @@
 
 import * as mariadb from 'mariadb';
 
-const pool = mariadb.createPool({
+const pool = mariadb.createPool({ //I am aware that best practice is to store these in a .env file. That is not necessary in this instance. 
     host: 'washington.uww.edu',
     user: 'massmanbs23',
     password: 'bm2921',
